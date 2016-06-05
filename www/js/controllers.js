@@ -18,7 +18,7 @@ angular.module('app.controllers', [])
     };
   })
 
-  .controller('addEditRatesCtrl', function ($scope, $http, ConfigService) {
+  .controller('addEditRatesCtrl', function ($scope, $http, $state, ConfigService) {
     $http.get('data/currencies.json').success(function (data) {
       $scope.currencies = data;
     });
@@ -31,6 +31,7 @@ angular.module('app.controllers', [])
     $scope.addExchangeRate = function(){
       ConfigService.addExchangeRate(this.exchange);
       this.exchange = {};
+      $state.go('tabsController.exchangeRates', {}, {reload: true});
     };
 
     $scope.baseCurrency = ConfigService.getBaseCurrency();
