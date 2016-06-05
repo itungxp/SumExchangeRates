@@ -1,0 +1,10 @@
+<ion-view title="Exchange Rates" id="page4" class=" ">
+  <ion-content padding="true" class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="exchange in exchangeRates">
+        <span ng-bind="exchange.code"></span>:&nbsp;
+        <span ng-bind="exchange.rate"></span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
