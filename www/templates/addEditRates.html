@@ -1,13 +1,12 @@
 <ion-view title="Add/Edit Rate" id="page3" class=" ">
   <ion-content padding="true" class="has-header">
     <form id="addEditRates-form2" class="list ">
-      <p id="addEditRates-markdown1" style="color:#000000;" class=" ">Choose your main Currency:</p>
-      <label class="item item-select " id="addEditRates-select2">
-        <span class="input-label"></span>
+      <label class="item item-input item-select" id="addEditRates-select2">
+        <span class="input-label">Your main Currency</span>
         <select ng-options="currency as currency for currency in currencies" ng-model="baseCurrency" ng-change="onBaseChanged()"></select>
       </label>
-      <p id="addEditRates-markdown2" style="color:#000000;" class=" ">Insert Exchange Rate</p>
-      <label class="item item-select " id="addEditRates-select4">
+      <h3>Insert Exchange Rate</h3>
+      <label class="item item-input item-select" id="addEditRates-select4">
         <span class="input-label">Currency</span>
         <select ng-options="currency as currency for currency in currencies" ng-model="exchange.code"></select>
       </label>
@@ -16,6 +15,6 @@
         <input type="text" placeholder="" ng-model="exchange.rate">
       </label>
     </form>
-    <button id="addEditRates-button6" class=" button button-positive  button-block " ng-click="addExchangeRate()">Add</button>
+    <button id="addEditRates-button6" class=" button button-calm  button-block " ng-click="addExchangeRate()">Add</button>
   </ion-content>
 </ion-view>

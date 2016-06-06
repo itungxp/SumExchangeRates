@@ -1,10 +1,13 @@
 <ion-view title="Sum Exchange Rates" id="page2" class=" ">
   <ion-content padding="true" class="has-header">
     <form id="sumExchangeRates-form1" class="list ">
-      <label class="item item-input " id="sumExchangeRates-input1">
+      <label class="item item-input item-floating-label">
         <span class="input-label">Total {{baseCurrency}}: </span>
-        <input type="text" placeholder="" ng-model="total" ng-change="calculate()">
-        <span class="input-label" ng-show="remains">Remain {{baseCurrency}}: {{remains | ceil}}</span>
+        <input type="text" placeholder="Total {{baseCurrency}}" ng-model="total" ng-change="calculate()">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Remain {{baseCurrency}}</span>
+        <input type="text" ng-model="remains | ceil">
       </label>
       <ion-item class="range range-positive " ng-repeat="exchange in exchangeRates">
         <span ng-show="total" ng-bind="total*exchange.rate | ceil"></span>
@@ -13,6 +16,6 @@
         <span ng-bind="exchange.amount"></span>
       </ion-item>
     </form>
-    <button ng-click="reset()" class=" button button-positive  button-block ">Reset</button>
+    <button ng-click="reset()" class=" button button-calm  button-block ">Reset</button>
   </ion-content>
 </ion-view>
