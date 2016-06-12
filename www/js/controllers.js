@@ -1,24 +1,45 @@
 angular.module('app.controllers', [])
 
   .controller('sumExchangeRatesCtrl', function ($scope, ConfigService) {
-    $scope.baseCurrency = ConfigService.getBaseCurrency();
-    $scope.exchangeRates = ConfigService.getExchangeRates();
 
-    $scope.calculate = function(){
+    $scope.calculate = function () {
       $scope.remains = this.total;
-      angular.forEach($scope.exchangeRates, function(exchange, key){
-        $scope.remains -= exchange.amount/exchange.rate;
+      angular.forEach($scope.exchangeRates, function (exchange, key) {
+        $scope.remains -= exchange.amount / exchange.rate;
       });
     };
 
-    $scope.reset = function(){
+    $scope.reload = function(){
+      $scope.baseCurrency = ConfigService.getBaseCurrency();
       $scope.exchangeRates = ConfigService.getExchangeRates();
+    };
+    $scope.reload();
+
+    $scope.reset = function () {
       this.total = '';
       $scope.remains = 0;
     };
+
+    $scope.$on('NewExchangeRateAdded', function () {
+      $scope.reload();
+    });
   })
 
-  .controller('addEditRatesCtrl', function ($scope, $http, $state, ConfigService) {
+  .controller('exchangeRatesCtrl', function ($scope, ConfigService) {
+    $scope.init = function() {
+      $scope.exchangeRates = ConfigService.getExchangeRates();
+    };
+
+    $scope.$on('NewExchangeRateAdded', function () {
+      $scope.init();
+    });
+
+    $scope.clear = function(){
+      ConfigService.deleteAll();
+    };
+  })
+
+  .controller('addEditRatesCtrl', function ($scope, $rootScope, $http, $state, ConfigService) {
     $http.get('data/currencies.json').success(function (data) {
       $scope.currencies = data;
     });
@@ -28,15 +49,11 @@ angular.module('app.controllers', [])
     };
 
     $scope.exchange = {amount: 0};
-    $scope.addExchangeRate = function(){
+    $scope.addExchangeRate = function () {
       ConfigService.addExchangeRate(this.exchange);
-      this.exchange = {};
-      $state.go('tabsController.exchangeRates', {}, {reload: true});
+      this.exchange = {amount: 0};
+      $rootScope.$broadcast('NewExchangeRateAdded');
     };
 
     $scope.baseCurrency = ConfigService.getBaseCurrency();
-  })
-
-  .controller('exchangeRatesCtrl', function ($scope, ConfigService) {
-      $scope.exchangeRates = ConfigService.getExchangeRates();
-  })
+  });
