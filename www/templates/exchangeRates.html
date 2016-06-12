@@ -1,4 +1,7 @@
-<ion-view title="Exchange Rates" id="page4" class=" ">
+<ion-view title="Exchange Rates" id="page4" class="">
+  <ion-nav-buttons side="right">
+    <button class="button btn-lg button-icon button-clear ion-ios-trash-outline" ng-click="deleteAll()"></button>
+  </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <ion-list ng-init="init()">
       <ion-item ng-repeat="exchange in exchangeRates">

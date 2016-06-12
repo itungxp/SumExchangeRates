@@ -1,4 +1,7 @@
 <ion-view title="Sum Exchange Rates" id="page2" class=" ">
+  <ion-nav-buttons side="right">
+    <button class="button btn-lg button-icon button-clear ion-ios-refresh-empty" ng-click="reset()"></button>
+  </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <form id="sumExchangeRates-form1" class="list ">
       <label class="item item-input item-floating-label">
@@ -12,10 +15,10 @@
       <ion-item class="range range-positive " ng-repeat="exchange in exchangeRates">
         <span ng-show="total" ng-bind="total*exchange.rate | ceil"></span>
         <span>&nbsp;{{exchange.code}}</span>
-        <input type="range" ng-disabled="!total" ng-model="exchange.amount" min="0" max="{{total*exchange.rate | ceil}}" ng-change="calculate()">
+        <input type="range" ng-disabled="!total" ng-model="exchange.amount" min="0" max="{{total*exchange.rate | ceil}}"
+               ng-change="calculate()">
         <span ng-bind="exchange.amount"></span>
       </ion-item>
     </form>
-    <button ng-click="reset()" class=" button button-calm  button-block ">Reset</button>
   </ion-content>
 </ion-view>

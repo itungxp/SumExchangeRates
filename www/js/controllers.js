@@ -16,26 +16,28 @@ angular.module('app.controllers', [])
     $scope.reload();
 
     $scope.reset = function () {
-      this.total = '';
+      $scope.total = '';
       $scope.remains = 0;
     };
 
-    $scope.$on('NewExchangeRateAdded', function () {
+    $scope.$on('ExchangeRatesChanged', function () {
       $scope.reload();
     });
   })
 
-  .controller('exchangeRatesCtrl', function ($scope, ConfigService) {
+  .controller('exchangeRatesCtrl', function ($scope, $rootScope, ConfigService) {
     $scope.init = function() {
       $scope.exchangeRates = ConfigService.getExchangeRates();
     };
 
-    $scope.$on('NewExchangeRateAdded', function () {
+    $scope.$on('ExchangeRatesChanged', function () {
       $scope.init();
     });
 
-    $scope.clear = function(){
+    $scope.deleteAll = function(){
+      $scope.exchangeRates = null;
       ConfigService.deleteAll();
+      $rootScope.$broadcast('ExchangeRatesChanged');
     };
   })
 
@@ -52,7 +54,7 @@ angular.module('app.controllers', [])
     $scope.addExchangeRate = function () {
       ConfigService.addExchangeRate(this.exchange);
       this.exchange = {amount: 0};
-      $rootScope.$broadcast('NewExchangeRateAdded');
+      $rootScope.$broadcast('ExchangeRatesChanged');
     };
 
     $scope.baseCurrency = ConfigService.getBaseCurrency();
