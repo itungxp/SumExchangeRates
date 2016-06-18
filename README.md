@@ -11,6 +11,8 @@ To calculate the amount need to pay in different currency
 ## Installation
 ```
 $ npm install -g cordova ionic
+$ npm install
+$ bower install
 ```
 
 ## Build
