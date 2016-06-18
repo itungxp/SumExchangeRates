@@ -1,22 +1,23 @@
 <ion-view title="Add/Edit Rate" id="page3" class=" ">
   <ion-content padding="true" class="has-header">
-    <form id="addEditRates-form2" class="list ">
-      <label class="item item-input item-select" id="addEditRates-select2">
-        <span class="input-label">Your main Currency</span>
-        <select ng-options="currency as currency for currency in currencies" ng-model="baseCurrency" ng-change="onBaseChanged()"></select>
+    <form name="form" class="list " novalidate ng-submit="addExchangeRate()">
+      <label class="item item-input item-floating-label" id="addEditRates-select2">
+        <span class="input-label">Main Currency</span>
+        <input type="text" ng-model="baseCurrency" ng-required="true" ng-change="onBaseChanged()" placeholder="Main Currency"/>
       </label>
-      <h3>Insert Exchange Rate</h3>
-      <label class="item item-input item-select" id="addEditRates-select4">
-        <span class="input-label">Currency</span>
-        <select ng-options="currency as currency for currency in currencies" ng-model="exchange.code"></select>
+      <label class="item item-input item-floating-label" id="addEditRates-select4">
+        <span class="input-label">Exchange Currency</span>
+        <input type="text" ng-model="exchange.code" ng-required="true" placeholder="Exchange Currency"/>
       </label>
-      <label class="item item-input " id="addEditRates-input2">
-        <span class="input-label">Rate</span>
-        <input type="text" placeholder="" ng-model="exchange.rate">
+      <label class="item item-input item-floating-label" id="addEditRates-input2">
+        <span class="input-label">Exchange Rate</span>
+        <input type="number" placeholder="Exchange Rate" ng-model="exchange.rate" ng-required="true">
       </label>
+      <div class="row">
+        <div class="col col-50 col-offset-50">
+          <button type="submit" class=" button button-calm  button-block ">Add</button>
+        </div>
+      </div>
     </form>
-    <div class="row">
-      <div class="col col-50 col-offset-50"><button id="addEditRates-button6" class=" button button-calm  button-block " ng-click="addExchangeRate()">Add</button></div>
-    </div>
   </ion-content>
 </ion-view>
