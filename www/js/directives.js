@@ -4,7 +4,7 @@ angular.module('app.directives', [])
 }])
 .filter('ceil', function() {
   return function(input) {
-    return Math.ceil(input);
+    if(input) return +input.toFixed(2);
   };
 });
 

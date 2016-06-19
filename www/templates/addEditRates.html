@@ -3,11 +3,11 @@
     <form name="form" class="list " novalidate ng-submit="addOrEdit()" >
       <label class="item item-input item-floating-label" id="addEditRates-select2">
         <span class="input-label">Main Currency</span>
-        <input type="text" ng-model="baseCurrency" ng-required="true" ng-change="onBaseChanged()" placeholder="Main Currency"/>
+        <input type="text" class="uppercase" ng-model="baseCurrency" ng-required="true" ng-change="onBaseChanged()" placeholder="Main Currency"/>
       </label>
       <label class="item item-input item-floating-label" id="addEditRates-select4">
         <span class="input-label">Exchange Currency</span>
-        <input type="text" ng-model="exchange.code" ng-required="true" placeholder="Exchange Currency"/>
+        <input type="text" class="uppercase" ng-model="exchange.code" ng-required="true" placeholder="Exchange Currency" uppercase/>
       </label>
       <label class="item item-input item-floating-label" id="addEditRates-input2">
         <span class="input-label">Exchange Rate</span>

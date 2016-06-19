@@ -62,7 +62,8 @@ angular.module('app.controllers', ['ngCordova'])
     $scope.tabTitle = angular.isDefined($stateParams.code) ? 'Edit' : 'Add';
 
     $scope.onBaseChanged = function () {
-      ConfigService.setBaseCurrency(this.baseCurrency.toUpperCase());
+      if(angular.isDefined(this.baseCurrency)) this.baseCurrency = this.baseCurrency.toUpperCase();
+      ConfigService.setBaseCurrency(this.baseCurrency);
       $rootScope.$broadcast('ExchangeRatesChanged');
     };
 
