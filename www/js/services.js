@@ -18,13 +18,22 @@ angular.module('app.services', [])
           localStorage.setItem("baseCurrency", base);
         }
       },
+      getExchangeRate: function (code) {
+        exchangeRates = this.getExchangeRates();
+        if (exchangeRates === null) return false;
+        for (var i = 0; i < exchangeRates.length; i++) {
+          if (exchangeRates[i].code == code) {
+            return exchangeRates[i];
+          }
+        }
+      },
       getExchangeRates: function () {
         if (typeof(Storage) != "undefined") {
           exchangeRates = angular.fromJson(localStorage.getItem("exchangeRates"));
         }
         return exchangeRates;
       },
-      addExchangeRate: function (exchange) {
+      addOrEdit: function (exchange) {
         exchangeRates = this.getExchangeRates();
         if (exchangeRates === null) exchangeRates = [];
         var existing = false;
@@ -50,6 +59,9 @@ angular.module('app.services', [])
             exchangeRates.splice(i, 1);
             break;
           }
+        }
+        if (typeof(Storage) != "undefined") {
+          localStorage.setItem("exchangeRates", angular.toJson(exchangeRates));
         }
       },
       deleteAll: function () {

@@ -30,8 +30,18 @@ angular.module('app.routes', [])
         }
       })
 
-      .state('tabsController.addEditRates', {
+      .state('tabsController.addRates', {
         url: '/add',
+        views: {
+          'tab3': {
+            templateUrl: 'templates/addEditRates.html',
+            controller: 'addEditRatesCtrl'
+          }
+        }
+      })
+
+      .state('tabsController.editRates', {
+        url: '/edit/:code',
         views: {
           'tab3': {
             templateUrl: 'templates/addEditRates.html',

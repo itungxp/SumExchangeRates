@@ -3,10 +3,13 @@
     <button class="button btn-lg button-icon button-clear ion-ios-trash-outline" ng-click="deleteAll()"></button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    <ion-list ng-init="init()">
+    <ion-list ng-init="init()" can-swipe="true">
       <ion-item ng-repeat="exchange in exchangeRates">
         <span ng-bind="exchange.code"></span>:&nbsp;
         <span ng-bind="exchange.rate"></span>
+
+        <ion-option-button class="button-calm" ng-click="edit(exchange)">Edit</ion-option-button>
+        <ion-option-button class="button-assertive" ng-click="delete(exchange)">Delete</ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

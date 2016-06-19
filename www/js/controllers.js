@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['ngCordova'])
 
   .controller('sumExchangeRatesCtrl', function ($scope, ConfigService) {
 
@@ -25,7 +25,7 @@ angular.module('app.controllers', [])
     });
   })
 
-  .controller('exchangeRatesCtrl', function ($scope, $rootScope, ConfigService) {
+  .controller('exchangeRatesCtrl', function ($scope, $rootScope, $location, ConfigService) {
     $scope.init = function() {
       $scope.exchangeRates = ConfigService.getExchangeRates();
     };
@@ -39,22 +39,30 @@ angular.module('app.controllers', [])
       ConfigService.deleteAll();
       $rootScope.$broadcast('ExchangeRatesChanged');
     };
+
+    $scope.delete = function(exchange){
+      ConfigService.delete(exchange.code);
+      $rootScope.$broadcast('ExchangeRatesChanged');
+    };
+
+    $scope.edit = function(exchange){
+      $location.path('/home/edit/' + exchange.code);
+    };
   })
 
-  .controller('addEditRatesCtrl', function ($scope, $rootScope, $http, $state, ConfigService) {
-    $http.get('data/currencies.json').success(function (data) {
-      $scope.currencies = data;
-    });
+  .controller('addEditRatesCtrl', function ($scope, $rootScope, $stateParams, $http, $cordovaToast, ConfigService) {
+    $scope.exchange = $stateParams.code ? ConfigService.getExchangeRate($stateParams.code) : {amount: 0};
+    $scope.tabTitle = angular.isDefined($stateParams.code) ? 'Edit' : 'Add';
 
     $scope.onBaseChanged = function () {
       ConfigService.setBaseCurrency(this.baseCurrency);
     };
 
-    $scope.exchange = {amount: 0};
-    $scope.addExchangeRate = function () {
-      ConfigService.addExchangeRate(this.exchange);
+    $scope.addOrEdit = function () {
+      ConfigService.addOrEdit(this.exchange);
       this.exchange = {amount: 0};
       $rootScope.$broadcast('ExchangeRatesChanged');
+      $cordovaToast.showShortBottom('Saved!');
     };
 
     $scope.baseCurrency = ConfigService.getBaseCurrency();
