@@ -25,7 +25,7 @@ angular.module('app.controllers', ['ngCordova'])
     });
   })
 
-  .controller('exchangeRatesCtrl', function ($scope, $rootScope, $location, ConfigService) {
+  .controller('exchangeRatesCtrl', function ($scope, $rootScope, $location, $ionicPopup, ConfigService) {
     $scope.init = function() {
       $scope.exchangeRates = ConfigService.getExchangeRates();
     };
@@ -35,9 +35,16 @@ angular.module('app.controllers', ['ngCordova'])
     });
 
     $scope.deleteAll = function(){
-      $scope.exchangeRates = null;
-      ConfigService.deleteAll();
-      $rootScope.$broadcast('ExchangeRatesChanged');
+      $ionicPopup.confirm({
+        title: 'Delete all',
+        template: 'Are you sure you want to delete all Exchange rates?'
+      }).then(function(agreed) {
+        if(agreed) {
+          $scope.exchangeRates = null;
+          ConfigService.deleteAll();
+          $rootScope.$broadcast('ExchangeRatesChanged');
+        }
+      });
     };
 
     $scope.delete = function(exchange){
