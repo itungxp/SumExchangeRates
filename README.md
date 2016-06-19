@@ -20,5 +20,18 @@ $ bower install
 ```
 $ ionic platform add ios
 $ ionic build ios
-$ ionic emulate ios
+```
+
+## Test
+Browser
+```
+$ ionic serve
+```
+Emulator
+```
+$ ionic emulate ios --target "iPhone-6s"
+```
+Device
+```
+$ ionic run ios
 ```
