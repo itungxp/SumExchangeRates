@@ -5,11 +5,11 @@
   <ion-content padding="true" class="has-header">
     <form id="sumExchangeRates-form1" class="list ">
       <label class="item item-input item-floating-label">
-        <span class="input-label">Total in {{baseCurrency}}: </span>
+        <span class="input-label">Total in {{baseCurrency}}:</span>
         <input type="number" placeholder="Total in {{baseCurrency}}" ng-model="total" ng-change="calculate()">
       </label>
       <label class="item item-input">
-        <span class="input-label">Remain in {{baseCurrency}}</span>
+        <span class="input-label">Remain in {{baseCurrency}}:</span>
         <span ng-show="remains !== undefined" ng-bind="remains | ceil"></span>
       </label>
       <ion-item class="range range-positive " ng-repeat="exchange in exchangeRates">

@@ -16,8 +16,9 @@ angular.module('app.controllers', ['ngCordova'])
     $scope.reload();
 
     $scope.reset = function () {
-      $scope.total = '';
-      $scope.remains = 0;
+      angular.forEach($scope.exchangeRates, function(exchange){
+        exchange.amount = 0;
+      });
     };
 
     $scope.$on('ExchangeRatesChanged', function () {
